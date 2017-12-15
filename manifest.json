@@ -1,0 +1,27 @@
+{
+	"initial": [
+		"libs/modules/egret/egret.js",
+		"libs/modules/egret/egret.web.js",
+		"libs/modules/game/game.js",
+		"libs/modules/res/res.js",
+		"libs/modules/tween/tween.js"
+	],
+	"game": [
+		"bin-debug/game/scene/Scene.js",
+		"bin-debug/game/controller/Controller.js",
+		"bin-debug/game/controller/Login.js",
+		"bin-debug/game/controller/Startup.js",
+		"bin-debug/game/controller/TestScrollView.js",
+		"bin-debug/game/scene/Hub.js",
+		"bin-debug/game/scene/Loading.js",
+		"bin-debug/game/scene/Login.js",
+		"bin-debug/Main.js",
+		"bin-debug/game/scene/Startup.js",
+		"bin-debug/game/scene/TestScrollView.js",
+		"bin-debug/game/struct/Scenes.js",
+		"bin-debug/utils/System.js",
+		"bin-debug/zero/ResLoader.js",
+		"bin-debug/zero/SceneMgr.js",
+		"bin-debug/zero/effect/Effect.js"
+	]
+}

@@ -116,9 +116,21 @@ declare let DEBUG: boolean;
  */
 declare let RELEASE: boolean;
 declare namespace egret {
+    /**
+     * @private
+     */
     function $error(code: number, ...params: any[]): void;
+    /**
+     * @private
+     */
     function $warn(code: number, ...params: any[]): void;
+    /**
+     * @private
+     */
     function getString(code: number, ...params: any[]): string;
+    /**
+     * @private
+     */
     function $markCannotUse(instance: any, property: string, defaultVale: any): void;
 }
 declare namespace egret {
@@ -3703,6 +3715,10 @@ declare namespace egret {
          */
         _bitmapData: BitmapData;
         /**
+         * @private
+         */
+        $rotated: boolean;
+        /**
          * The BitmapData object being referenced.
          * @version Egret 2.4
          * @platform Web,Native
@@ -3742,7 +3758,7 @@ declare namespace egret {
          * @param sourceWidth
          * @param sourceHeight
          */
-        $initData(bitmapX: number, bitmapY: number, bitmapWidth: number, bitmapHeight: number, offsetX: number, offsetY: number, textureWidth: number, textureHeight: number, sourceWidth: number, sourceHeight: number): void;
+        $initData(bitmapX: number, bitmapY: number, bitmapWidth: number, bitmapHeight: number, offsetX: number, offsetY: number, textureWidth: number, textureHeight: number, sourceWidth: number, sourceHeight: number, rotated?: boolean): void;
         /**
          * @deprecated
          */
@@ -5920,6 +5936,7 @@ declare namespace egret {
         height: number;
         /**
          * Original bitmap image.
+         * HTMLImageElement|HTMLCanvasElement|HTMLVideoElement
          * @version Egret 2.4
          * @platform Web,Native
          * @private
@@ -5927,6 +5944,7 @@ declare namespace egret {
          */
         /**
          * 原始位图图像。
+         * HTMLImageElement|HTMLCanvasElement|HTMLVideoElement
          * @version Egret 2.4
          * @platform Web,Native
          * @private
@@ -5966,6 +5984,20 @@ declare namespace egret {
          * webgl纹理生成后，是否删掉原始图像数据
          */
         $deleteSource: boolean;
+        /**
+         * Initializes a BitmapData object to refer to the specified source object.
+         * @param source The source object being referenced.
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @language en_US
+         */
+        /**
+         * 创建一个引用指定 source 实例的 BitmapData 对象
+         * @param source 被引用的 source 实例
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @language zh_CN
+         */
         constructor(source: any);
         static create(type: "arraybuffer", data: ArrayBuffer): BitmapData;
         static create(type: "base64", data: string): BitmapData;
@@ -6561,6 +6593,13 @@ declare namespace egret {
          */
         type: string;
         /**
+         * The inner margin of the filter.
+         * If the desired area of the custom filter is larger than the original area (stroke, etc.), you need to set it manually.
+         * @version Egret 4.1.0
+         * @platform Web
+         * @language en_US
+         */
+        /**
          * 滤镜的内边距
          * 如果自定义滤镜所需区域比原区域大（描边等），需要手动设置
          * @version Egret 4.1.0
@@ -6568,13 +6607,33 @@ declare namespace egret {
          * @language zh_CN
          */
         padding: number;
+        /**
+         * The initial value of the uniform in the shader (key, value one-to-one correspondence), currently only supports numbers and arrays.
+         * @version Egret 4.1.0
+         * @platform Web
+         * @language en_US
+         */
+        /**
+         * 着色器中uniform的初始值（key，value一一对应），目前仅支持数字和数组。
+         * @version Egret 4.1.0
+         * @platform Web
+         * @language zh_CN
+         */
         readonly uniforms: any;
         /**
+         * Initialize the CustomFilter object.
+         * @param vertexSrc Custom vertex shader program.
+         * @param fragmentSrc Custom fragment shader program.
+         * @param uniforms The initial value of the uniform in the shader (key, value one-to-one correspondence), currently only supports numbers and arrays.
+         * @version Egret 4.1.0
+         * @platform Web
+         * @language en_US
+         */
+        /**
          * 初始化 CustomFilter 对象
-         * @method egret.CustomFilter#constructor
-         * @param vertexSrc {string} 自定义的顶点着色器程序。
-         * @param fragmentSrc {string} 自定义的片段着色器程序。
-         * @param uniforms {any} 着色器中uniform的初始值（key，value一一对应），目前仅支持数字和数组。
+         * @param vertexSrc 自定义的顶点着色器程序。
+         * @param fragmentSrc 自定义的片段着色器程序。
+         * @param uniforms 着色器中uniform的初始值（key，value一一对应），目前仅支持数字和数组。
          * @version Egret 4.1.0
          * @platform Web
          * @language zh_CN
@@ -6753,8 +6812,16 @@ declare namespace egret {
      */
     class Graphics extends HashObject {
         /**
+         * Initializes a Graphics object.
          * @version Egret 2.4
          * @platform Web,Native
+         * @language en_US
+         */
+        /**
+         * 创建一个 Graphics 对象。
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @language zh_CN
          */
         constructor();
         /**
@@ -9168,10 +9235,12 @@ declare namespace egret {
     };
     /**
      * Insert render context, now for egret3d
+     * @private
      * @language en_US
      */
     /**
      * 插入渲染上下文，目前用于egret3d的混入
+     * @private
      * @language zh_CN
      */
     function setRendererContext(custom: CustomContext): void;
@@ -9806,7 +9875,6 @@ declare namespace egret.sys {
      */
     let $requestRenderingFlag: boolean;
     /**
-     * @private
      * Egret心跳计时器
      */
     class SystemTicker {
@@ -9862,7 +9930,13 @@ declare namespace egret.sys {
          * @private
          */
         private frameInterval;
+        /**
+         * @private
+         */
         private frameDeltaTime;
+        /**
+         * @private
+         */
         private lastTimeStamp;
         /**
          * @private
@@ -9878,6 +9952,37 @@ declare namespace egret.sys {
          * ticker 花销的时间
          */
         private costEnterFrame;
+        /**
+         * @private
+         * 是否被暂停
+         */
+        private isPaused;
+        /**
+         * Pause the ticker.
+         * @version Egret 5.0.2
+         * @platform Web,Native
+         * @language en_US
+         */
+        /**
+         * 暂停心跳
+         * @version Egret 5.0.2
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        pause(): void;
+        /**
+         * Resume the ticker.
+         * @version Egret 5.0.2
+         * @platform Web,Native
+         * @language en_US
+         */
+        /**
+         * 恢复心跳
+         * @version Egret 5.0.2
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        resume(): void;
         /**
          * @private
          * 执行一次刷新
@@ -9907,11 +10012,32 @@ declare namespace egret.sys {
          */
         private callLaterAsyncs();
     }
+}
+declare module egret {
     /**
-     * @private
      * 心跳计时器单例
      */
-    let $ticker: SystemTicker;
+    let $ticker: sys.SystemTicker;
+    namespace lifecycle {
+        type LifecyclePlugin = (context: LifecycleContext) => void;
+        /**
+         * @private
+         */
+        let stage: egret.Stage;
+        /**
+         * @private
+         */
+        let contexts: LifecycleContext[];
+        class LifecycleContext {
+            pause(): void;
+            resume(): void;
+            onUpdate?: () => void;
+        }
+        let onResume: () => void;
+        let onPause: () => void;
+        function addLifecycleListener(plugin: LifecyclePlugin): void;
+    }
+    let ticker: sys.SystemTicker;
 }
 /**
  * @private
@@ -10020,6 +10146,10 @@ declare namespace egret.sys {
          * 颜色变换滤镜
          */
         filter: ColorMatrixFilter;
+        /**
+         * 翻转
+         */
+        rotated: boolean;
         /**
          * 绘制一次位图
          */
@@ -10176,6 +10306,18 @@ declare namespace egret.sys {
          * 顶点索引。
          */
         bounds: Rectangle;
+        /**
+         * 使用的混合模式
+         */
+        blendMode: number;
+        /**
+         * 相对透明度
+         */
+        alpha: number;
+        /**
+         * 颜色变换滤镜
+         */
+        filter: ColorMatrixFilter;
         /**
          * 绘制一次位图
          */
@@ -13452,6 +13594,9 @@ declare namespace egret {
  * @private
  */
 declare let chars: string;
+/**
+ * @private
+ */
 declare let lookup: Uint8Array;
 declare namespace egret {
     /**

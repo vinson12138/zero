@@ -10,6 +10,7 @@ var game;
 (function (game) {
     var scene;
     (function (scene) {
+        var Scene = zero.Scene;
         var Login = (function (_super) {
             __extends(Login, _super);
             function Login() {
@@ -22,7 +23,7 @@ var game;
                 console.log("调用子类的initUI");
             };
             return Login;
-        }(scene.Scene));
+        }(Scene));
         scene.Login = Login;
         __reflect(Login.prototype, "game.scene.Login");
     })(scene = game.scene || (game.scene = {}));

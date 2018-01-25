@@ -22,11 +22,11 @@
 
     <!--这个标签为通过egret提供的第三方库的方式生成的 javascript 文件。删除 modules_files 标签后，库文件加载列表将不会变化，请谨慎操作！-->
     <!--modules_files_start-->
-	<script egret="lib" src="libs/modules/egret/egret.js" src-release="libs/modules/egret/egret.min.js"></script>
-	<script egret="lib" src="libs/modules/egret/egret.web.js" src-release="libs/modules/egret/egret.web.min.js"></script>
-	<script egret="lib" src="libs/modules/game/game.js" src-release="libs/modules/game/game.min.js"></script>
-	<script egret="lib" src="libs/modules/res/res.js" src-release="libs/modules/res/res.min.js"></script>
-	<script egret="lib" src="libs/modules/tween/tween.js" src-release="libs/modules/tween/tween.min.js"></script>
+	<script egret="lib" src="libs/modules/egret/egret.js"></script>
+	<script egret="lib" src="libs/modules/egret/egret.web.js"></script>
+	<script egret="lib" src="libs/modules/eui/eui.js"></script>
+	<script egret="lib" src="libs/modules/res/res.js"></script>
+	<script egret="lib" src="libs/modules/tween/tween.js"></script>
 	<!--modules_files_end-->
 
     <!--这个标签为不通过egret提供的第三方库的方式使用的 javascript 文件，请将这些文件放在libs下，但不要放在modules下面。-->
@@ -34,23 +34,31 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
-	<script egret="game" src="bin-debug/game/scene/Scene.js"></script>
-	<script egret="game" src="bin-debug/game/controller/Controller.js"></script>
-	<script egret="game" src="bin-debug/game/controller/Startup.js"></script>
-	<script egret="game" src="bin-debug/game/controller/TestScrollView.js"></script>
-	<script egret="game" src="bin-debug/game/scene/Hub.js"></script>
-	<script egret="game" src="bin-debug/game/scene/Loading.js"></script>
-	<script egret="game" src="bin-debug/game/scene/Login.js"></script>
-	<script egret="game" src="bin-debug/zero/SceneMgr.js"></script>
-	<script egret="game" src="bin-debug/game/controller/Login.js"></script>
-	<script egret="game" src="bin-debug/game/scene/TestScrollView.js"></script>
-	<script egret="game" src="bin-debug/game/struct/Scenes.js"></script>
-	<script egret="game" src="bin-debug/Main.js"></script>
-	<script egret="game" src="bin-debug/utils/System.js"></script>
-	<script egret="game" src="bin-debug/zero/Comfirm.js"></script>
-	<script egret="game" src="bin-debug/zero/effect/Effect.js"></script>
-	<script egret="game" src="bin-debug/zero/ResLoader.js"></script>
-	<script egret="game" src="bin-debug/game/scene/Startup.js"></script>
+	<script egret="lib" src="bin-debug/zero/scene/Scene.js"></script>
+	<script egret="lib" src="bin-debug/zero/utils/System.js"></script>
+	<script egret="lib" src="bin-debug/game/controller/Controller.js"></script>
+	<script egret="lib" src="bin-debug/zero/scene/layer/LayerMgr.js"></script>
+	<script egret="lib" src="bin-debug/zero/scene/SceneMgr.js"></script>
+	<script egret="lib" src="bin-debug/example/scenes/LoginScene.js"></script>
+	<script egret="lib" src="bin-debug/AssetAdapter.js"></script>
+	<script egret="lib" src="bin-debug/game/controller/Login.js"></script>
+	<script egret="lib" src="bin-debug/game/controller/Startup.js"></script>
+	<script egret="lib" src="bin-debug/game/controller/TestScrollView.js"></script>
+	<script egret="lib" src="bin-debug/game/scene/Hub.js"></script>
+	<script egret="lib" src="bin-debug/game/scene/Loading.js"></script>
+	<script egret="lib" src="bin-debug/example/constants/LayerConst.js"></script>
+	<script egret="lib" src="bin-debug/game/scene/Startup.js"></script>
+	<script egret="lib" src="bin-debug/game/scene/TestScrollView.js"></script>
+	<script egret="lib" src="bin-debug/game/struct/Scenes.js"></script>
+	<script egret="lib" src="bin-debug/Main.js"></script>
+	<script egret="lib" src="bin-debug/ThemeAdapter.js"></script>
+	<script egret="lib" src="bin-debug/zero/Comfirm.js"></script>
+	<script egret="lib" src="bin-debug/zero/effect/Effect.js"></script>
+	<script egret="lib" src="bin-debug/zero/Global.js"></script>
+	<script egret="lib" src="bin-debug/example/hub/views/HubMain.js"></script>
+	<script egret="lib" src="bin-debug/example/login/views/LoginMain.js"></script>
+	<script egret="lib" src="bin-debug/example/scenes/HubScene.js"></script>
+	<script egret="lib" src="bin-debug/game/scene/Login.js"></script>
 	<!--game_files_end-->
 </head>
 <body>
@@ -60,8 +68,8 @@
          data-orientation="auto"
          data-scale-mode="showAll"
          data-frame-rate="30"
-         data-content-width="1136"
-         data-content-height="640"
+         data-content-width="1280"
+         data-content-height="720"
          data-show-paint-rect="false"
          data-multi-fingered="2"
          data-show-fps="false" data-show-log="false"

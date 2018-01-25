@@ -7,13 +7,13 @@
     "native": 1,
     "path": "bin-release"
   },
-  "egret_version": "4.1.0",
+  "egret_version": "5.0.4",
   "modules": [
     {
       "name": "egret"
     },
     {
-      "name": "game"
+      "name": "eui"
     },
     {
       "name": "res"

@@ -1,5 +1,8 @@
 module game.scene {
-	export class Loading extends Scene{
+	import Scene = zero.Scene;
+    import System = zero.System;
+
+    export class Loading extends Scene{
 		private _controller:controller.Controller;
 		private nodes:egret.DisplayObject[]
 		public constructor() {

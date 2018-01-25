@@ -10,7 +10,8 @@ var game;
 (function (game) {
     var scene;
     (function (scene) {
-        //import Scene = zero.Scene;
+        var Scene = zero.Scene;
+        var System = zero.System;
         var Startup = (function (_super) {
             __extends(Startup, _super);
             function Startup() {
@@ -27,7 +28,7 @@ var game;
             Startup.prototype.initUI = function () {
                 var shp = new egret.Shape();
                 shp.graphics.beginFill(0x000000, 1);
-                shp.graphics.drawRect(0, 0, game.System.width, game.System.height);
+                shp.graphics.drawRect(0, 0, System.width, System.height);
                 shp.graphics.endFill();
                 this.addChild(shp);
                 var sun = new egret.Shape();
@@ -37,8 +38,8 @@ var game;
                 this.addChild(sun);
                 var sprite0 = new egret.Sprite();
                 sprite0.addChild(sun);
-                sprite0.x = (game.System.width - sun.width) / 2;
-                sprite0.y = (game.System.height - sun.height) / 2;
+                sprite0.x = (System.width - sun.width) / 2;
+                sprite0.y = (System.height - sun.height) / 2;
                 sprite0.touchEnabled = true;
                 this.addChild(sprite0);
                 var circle = new egret.Shape();
@@ -61,7 +62,7 @@ var game;
                 circle2.graphics.endFill();
                 var sprite2 = new egret.Sprite();
                 sprite2.addChild(circle2);
-                //sprite2.x = game.System.width -450;
+                //sprite2.x = zero.System.width -450;
                 //sprite2.y = 270;
                 sprite2.x = 225;
                 sprite2.y = 245;
@@ -80,7 +81,7 @@ var game;
             Startup.prototype.onTouch = function (e) {
                 var _this = this;
                 effect.rotate(this._circle, 500, null, null, true);
-                effect.revolve2(this._circle, new egret.Point(game.System.width / 2, game.System.height / 2), 4000, -1, false, .5);
+                effect.revolve2(this._circle, new egret.Point(System.width / 2, System.height / 2), 4000, -1, false, .5);
                 //effect.revolve2(this._circle2, new egret.Point(this._circle.x, this._circle.y), 3000)
                 //effect.rotate(this._circle, null, 2000);
                 //effect.revolve(this._circle, new egret.Point(System.width/2, System.height/2), false, 4000);
@@ -92,7 +93,7 @@ var game;
                     console.log("\t执行：", _this);
                 };
                 var b = function () {
-                    console.log("\t执行：取消发顺丰");
+                    console.log("\t执行：取消发送");
                 };
                 var confirm = new zero.component.Confirm("测试确认框", ["确认", "取消", "忽略"], [a, b], this);
                 confirm.show();
@@ -101,7 +102,7 @@ var game;
                 confirm.clickBtn(2);
             };
             return Startup;
-        }(scene.Scene));
+        }(Scene));
         scene.Startup = Startup;
         __reflect(Startup.prototype, "game.scene.Startup");
     })(scene = game.scene || (game.scene = {}));

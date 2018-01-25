@@ -1,6 +1,7 @@
 module game.controller {
-	import Scene = game.scene.Scene;
-	export class Controller {
+	import Scene = zero.Scene;
+
+    export class Controller {
 		protected _scene: Scene;
 		public constructor() {
 		}
@@ -17,7 +18,7 @@ module game.controller {
 				case Scenes.Hub: clazz = game.scene.Hub; break;
 				default: ;
 			}
-			sceneMgr.loadScene(clazz);
+			sceneMgr.load(clazz);
 		}
 		public destroy(): void {
 			this._scene = null;

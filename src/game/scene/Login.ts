@@ -1,5 +1,7 @@
 module game.scene {
-	export class Login extends Scene{
+	import Scene = zero.Scene;
+
+    export class Login extends Scene{
 		public constructor() {
 			super();
 			console.log("Login 创建了..");

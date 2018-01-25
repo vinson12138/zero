@@ -33,7 +33,7 @@ var game;
                         break;
                     default: ;
                 }
-                sceneMgr.loadScene(clazz);
+                sceneMgr.load(clazz);
             };
             Controller.prototype.destroy = function () {
                 this._scene = null;

@@ -1,57 +1,99 @@
-
-class Main extends egret.DisplayObjectContainer {
-
-    public constructor() {
-        super();
-        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
+class Main extends eui.UILayer {
+    protected createChildren(): void {
+        super.createChildren();
+        //inject the custom material parser
+        //注入自定义的素材解析器
+        let assetAdapter = new AssetAdapter();
+        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
+        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
+        //Config loading process interface
+        //设置加载进度界面
+        // initialize the Resource loading library
+        //初始化Resource资源加载库
+        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
+        RES.loadConfig("resource/default.res.json", "resource/");
     }
-    private onAddToStage(e: egret.Event): void {
-        /**将设备的宽高预存到System类中 */
-        game.System.width = this.stage.stageWidth;
-        game.System.height = this.stage.stageHeight;
-
-        // RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        // RES.loadConfig("", "");
-        this.createGameScene();
-    }
-    /**配置文件加载完成后，开始预加载资源组 */
-    private onConfigComplete(e: RES.ResourceEvent): void {
+    /**
+     * 配置文件加载完成,开始预加载皮肤主题资源和preload资源组。
+     * Loading of configuration file is complete, start to pre-load the theme configuration file and the preload resource group
+     */
+    private onConfigComplete(event: RES.ResourceEvent): void {
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onGroupComplete, this);
-        RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onGroupError, this);
-        RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onGroupProgress, this);
-        RES.addEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemError, this);
-        RES.loadConfig("");
-    }
-    private onGroupComplete(e: RES.ResourceEvent): void {
-        if (e.groupName === "") {
-            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onGroupComplete, this);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onGroupError, this);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onGroupProgress, this);
-            RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemError, this);
+        // load skin theme configuration file, you can manually modify the file. And replace the default skin.
+        //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
+        let theme = new eui.Theme("resource/default.thm.json", this.stage);
+        theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
 
-            this.createGameScene();
+        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+        RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
+        RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
+        RES.addEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
+        RES.loadGroup("preload");
+    }
+    private isThemeLoadEnd: boolean = false;
+    /**
+     * 主题文件加载完成,开始预加载
+     * Loading of theme configuration file is complete, start to pre-load the
+     */
+    private onThemeLoadComplete(): void {
+        this.isThemeLoadEnd = true;
+        this.createScene();
+    }
+    private isResourceLoadEnd: boolean = false;
+    /**
+     * preload资源组加载完成
+     * preload resource group is loaded
+     */
+    private onResourceLoadComplete(event: RES.ResourceEvent): void {
+        if (event.groupName == "preload") {
+            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+            RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
+            RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
+            RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
+            this.isResourceLoadEnd = true;
+            this.createScene();
         }
     }
-    private onGroupProgress(e: RES.ResourceEvent): void {
-        if(e.groupName === ""){
-            //给加载界面设置进度数据
+    private createScene() {
+        if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
+            this.startCreateScene();
         }
     }
-    private onGroupError(e: RES.ResourceEvent): void {
-        console.warn("GROUP: " + e.groupName + " has failed to load");
+    /**
+     * 资源组加载出错
+     *  The resource group loading failed
+     */
+    private onItemLoadError(event: RES.ResourceEvent): void {
+        console.warn("Url:" + event.resItem.url + " has failed to load");
+    }
+    /**
+     * 资源组加载出错
+     * Resource group loading failed
+     */
+    private onResourceLoadError(event: RES.ResourceEvent): void {
+        console.warn("Group:" + event.groupName + " has failed to load");
         //忽略加载失败的项目
-        this.onGroupComplete(e);
+        //ignore loading failed projects
+        this.onResourceLoadComplete(event);
     }
-    private onItemError(e: RES.ResourceEvent): void {
-        console.warn("URL: " + e.resItem.url + " has failed to load");
+    /**
+     * preload资源组加载进度
+     * loading process of preload resource
+     */
+    private onResourceProgress(event: RES.ResourceEvent): void {
+        if (event.groupName == "preload") {
+
+        }
+    }
+    /**
+     * 创建场景界面
+     * Create scene interface
+     */
+    protected startCreateScene(): void {
+        zero.sceneMgr.sceneContainer = this.stage;
+        this.stage.removeChildren();
+        zero.sceneMgr.load(example.LoginScene);
     }
 
-    private createGameScene() {
-        let sceneMgr = zero.SceneMgr.getInstance();
-        sceneMgr.sceneContainer = this;
-        sceneMgr.loadScene(test.TestScrollView);
 
-        console.log(this);
-     };
 }

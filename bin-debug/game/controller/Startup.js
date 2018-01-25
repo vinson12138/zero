@@ -17,7 +17,7 @@ var game;
             }
             Startup.prototype.forward = function () {
                 var sceneMgr = zero.SceneMgr.getInstance();
-                sceneMgr.loadScene(test.TestScrollView);
+                sceneMgr.load(test.TestScrollView);
             };
             return Startup;
         }(game.controller.Controller));

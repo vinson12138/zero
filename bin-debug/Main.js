@@ -9,58 +9,102 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
-        var _this = _super.call(this) || this;
-        _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.isThemeLoadEnd = false;
+        _this.isResourceLoadEnd = false;
         return _this;
     }
-    Main.prototype.onAddToStage = function (e) {
-        /**将设备的宽高预存到System类中 */
-        game.System.width = this.stage.stageWidth;
-        game.System.height = this.stage.stageHeight;
-        // RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        // RES.loadConfig("", "");
-        this.createGameScene();
+    Main.prototype.createChildren = function () {
+        _super.prototype.createChildren.call(this);
+        //inject the custom material parser
+        //注入自定义的素材解析器
+        var assetAdapter = new AssetAdapter();
+        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
+        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
+        //Config loading process interface
+        //设置加载进度界面
+        // initialize the Resource loading library
+        //初始化Resource资源加载库
+        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
+        RES.loadConfig("resource/default.res.json", "resource/");
     };
-    /**配置文件加载完成后，开始预加载资源组 */
-    Main.prototype.onConfigComplete = function (e) {
+    /**
+     * 配置文件加载完成,开始预加载皮肤主题资源和preload资源组。
+     * Loading of configuration file is complete, start to pre-load the theme configuration file and the preload resource group
+     */
+    Main.prototype.onConfigComplete = function (event) {
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onGroupComplete, this);
-        RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onGroupError, this);
-        RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onGroupProgress, this);
-        RES.addEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemError, this);
-        RES.loadConfig("");
+        // load skin theme configuration file, you can manually modify the file. And replace the default skin.
+        //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
+        var theme = new eui.Theme("resource/default.thm.json", this.stage);
+        theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
+        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+        RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
+        RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
+        RES.addEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
+        RES.loadGroup("preload");
     };
-    Main.prototype.onGroupComplete = function (e) {
-        if (e.groupName === "") {
-            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onGroupComplete, this);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onGroupError, this);
-            RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onGroupProgress, this);
-            RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemError, this);
-            this.createGameScene();
+    /**
+     * 主题文件加载完成,开始预加载
+     * Loading of theme configuration file is complete, start to pre-load the
+     */
+    Main.prototype.onThemeLoadComplete = function () {
+        this.isThemeLoadEnd = true;
+        this.createScene();
+    };
+    /**
+     * preload资源组加载完成
+     * preload resource group is loaded
+     */
+    Main.prototype.onResourceLoadComplete = function (event) {
+        if (event.groupName == "preload") {
+            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+            RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
+            RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
+            RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
+            this.isResourceLoadEnd = true;
+            this.createScene();
         }
     };
-    Main.prototype.onGroupProgress = function (e) {
-        if (e.groupName === "") {
+    Main.prototype.createScene = function () {
+        if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
+            this.startCreateScene();
         }
     };
-    Main.prototype.onGroupError = function (e) {
-        console.warn("GROUP: " + e.groupName + " has failed to load");
+    /**
+     * 资源组加载出错
+     *  The resource group loading failed
+     */
+    Main.prototype.onItemLoadError = function (event) {
+        console.warn("Url:" + event.resItem.url + " has failed to load");
+    };
+    /**
+     * 资源组加载出错
+     * Resource group loading failed
+     */
+    Main.prototype.onResourceLoadError = function (event) {
+        console.warn("Group:" + event.groupName + " has failed to load");
         //忽略加载失败的项目
-        this.onGroupComplete(e);
+        //ignore loading failed projects
+        this.onResourceLoadComplete(event);
     };
-    Main.prototype.onItemError = function (e) {
-        console.warn("URL: " + e.resItem.url + " has failed to load");
+    /**
+     * preload资源组加载进度
+     * loading process of preload resource
+     */
+    Main.prototype.onResourceProgress = function (event) {
+        if (event.groupName == "preload") {
+        }
     };
-    Main.prototype.createGameScene = function () {
-        this.sceneContainer = new egret.DisplayObjectContainer();
-        this.sceneContainer.name = "SceneContainer";
-        this.addChild(this.sceneContainer);
-        var sceneMgr = zero.SceneMgr.getInstance();
-        sceneMgr.sceneContainer = this;
-        sceneMgr.loadScene(test.TestScrollView);
-        console.log(this);
+    /**
+     * 创建场景界面
+     * Create scene interface
+     */
+    Main.prototype.startCreateScene = function () {
+        zero.sceneMgr.sceneContainer = this.stage;
+        this.stage.removeChildren();
+        zero.sceneMgr.load(example.LoginScene);
     };
-    ;
     return Main;
-}(egret.DisplayObjectContainer));
+}(eui.UILayer));
 __reflect(Main.prototype, "Main");

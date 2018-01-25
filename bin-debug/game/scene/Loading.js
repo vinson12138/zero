@@ -10,6 +10,8 @@ var game;
 (function (game) {
     var scene;
     (function (scene) {
+        var Scene = zero.Scene;
+        var System = zero.System;
         var Loading = (function (_super) {
             __extends(Loading, _super);
             function Loading() {
@@ -26,7 +28,7 @@ var game;
                 for (var i = 0; i < 500; i++) {
                     rect = new egret.Shape();
                     rect.graphics.beginFill(0xff0000, 0.1);
-                    rect.graphics.drawRect(0, 0, game.System.width, game.System.height);
+                    rect.graphics.drawRect(0, 0, System.width, System.height);
                     rect.graphics.endFill();
                     this.addChild(rect);
                     this.nodes.push(rect);
@@ -38,7 +40,7 @@ var game;
                 this._controller.forward();
             };
             return Loading;
-        }(scene.Scene));
+        }(Scene));
         scene.Loading = Loading;
         __reflect(Loading.prototype, "game.scene.Loading");
     })(scene = game.scene || (game.scene = {}));

@@ -1,6 +1,8 @@
 module game.scene {
-	//import Scene = zero.Scene;
-	export class Startup extends Scene {
+	import Scene = zero.Scene;
+    import System = zero.System;
+
+    export class Startup extends Scene {
 		private _controller: game.controller.Startup;
 
 		private _circle:egret.DisplayObject;
@@ -18,7 +20,7 @@ module game.scene {
 		protected initUI(): void {
 			let shp = new egret.Shape();
 			shp.graphics.beginFill(0x000000, 1);
-			shp.graphics.drawRect(0, 0, game.System.width, game.System.height);
+			shp.graphics.drawRect(0, 0, System.width, System.height);
 			shp.graphics.endFill();
 			this.addChild(shp);
 
@@ -58,7 +60,7 @@ module game.scene {
 			
 			let sprite2 = new egret.Sprite();
 			sprite2.addChild(circle2);
-			//sprite2.x = game.System.width -450;
+			//sprite2.x = zero.System.width -450;
 			//sprite2.y = 270;
 			sprite2.x = 225;
 			sprite2.y = 245;

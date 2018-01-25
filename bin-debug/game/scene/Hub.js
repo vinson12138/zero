@@ -10,6 +10,7 @@ var game;
 (function (game) {
     var scene;
     (function (scene) {
+        var Scene = zero.Scene;
         var Hub = (function (_super) {
             __extends(Hub, _super);
             function Hub() {
@@ -18,7 +19,7 @@ var game;
                 return _this;
             }
             return Hub;
-        }(scene.Scene));
+        }(Scene));
         scene.Hub = Hub;
         __reflect(Hub.prototype, "game.scene.Hub");
     })(scene = game.scene || (game.scene = {}));

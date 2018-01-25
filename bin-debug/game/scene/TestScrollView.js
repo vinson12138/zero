@@ -8,6 +8,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var test;
 (function (test) {
+    var Scene = zero.Scene;
     var TestScrollView = (function (_super) {
         __extends(TestScrollView, _super);
         function TestScrollView() {
@@ -23,7 +24,7 @@ var test;
         TestScrollView.prototype.initUI = function () {
             var shape = new egret.Shape();
             shape.graphics.beginFill(0xffffff);
-            shape.graphics.drawRect(0, 0, game.System.width, game.System.height);
+            shape.graphics.drawRect(0, 0, zero.System.width, zero.System.height);
             shape.graphics.endFill();
             this.addChild(shape);
             this.spContent = new egret.Sprite();
@@ -32,8 +33,8 @@ var test;
             this.spContent.touchChildren = true;
             this.spContent.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onBtnTouch, this);
             //创建ScrollView
-            this.scrollview = new egret.ScrollView();
-            this.scrollview.setContent(this.spContent);
+            this.scrollview = new eui.Scroller();
+            this.scrollview.addChild(this.spContent);
             this.scrollview.width = 800;
             this.scrollview.height = 400;
             this.scrollview.x = 100;
@@ -47,6 +48,12 @@ var test;
             this.scrollviewBG.x = this.scrollview.x;
             this.scrollviewBG.y = this.scrollview.y;
             this.addChild(this.scrollviewBG);
+            var euiLayer = new eui.UILayer();
+            euiLayer.name = "EUILayer";
+            this.addChild(euiLayer);
+            var sprite = new egret.Sprite();
+            sprite.name = "SpriteLayer";
+            this.addChild(sprite);
         };
         TestScrollView.prototype.initContent = function () {
             for (var i = 0; i < 10; i++) {
@@ -65,7 +72,7 @@ var test;
             this._controller.forward(Number(e.target.name));
         };
         return TestScrollView;
-    }(game.scene.Scene));
+    }(Scene));
     test.TestScrollView = TestScrollView;
     __reflect(TestScrollView.prototype, "test.TestScrollView");
 })(test || (test = {}));

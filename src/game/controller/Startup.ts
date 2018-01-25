@@ -5,7 +5,7 @@ module game.controller {
 		}
 		public forward():void{
 			let sceneMgr = zero.SceneMgr.getInstance();
-			sceneMgr.loadScene(test.TestScrollView);
+			sceneMgr.load(test.TestScrollView);
 		}
 	}
 }

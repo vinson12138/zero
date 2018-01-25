@@ -1,7 +1,9 @@
 module test {
-	export class TestScrollView extends game.scene.Scene {
+	import Scene = zero.Scene;
+
+    export class TestScrollView extends Scene {
 		private scrollviewBG: egret.Shape;
-		private scrollview: egret.ScrollView;
+		private scrollview: eui.Scroller;
 		private spContent: egret.Sprite;
 
 		private _controller: game.controller.Controller;
@@ -18,7 +20,7 @@ module test {
 		protected initUI(): void {
 			let shape = new egret.Shape();
 			shape.graphics.beginFill(0xffffff);
-			shape.graphics.drawRect(0, 0, game.System.width, game.System.height);
+			shape.graphics.drawRect(0, 0, zero.System.width, zero.System.height);
 			shape.graphics.endFill();
 			this.addChild(shape);
 
@@ -28,8 +30,8 @@ module test {
 			this.spContent.touchChildren = true;
 			this.spContent.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onBtnTouch, this);
 			//创建ScrollView
-			this.scrollview = new egret.ScrollView();
-			this.scrollview.setContent(this.spContent);
+			this.scrollview = new eui.Scroller();
+			this.scrollview.addChild(this.spContent);
 			this.scrollview.width = 800;
 			this.scrollview.height = 400;
 			this.scrollview.x = 100;
@@ -43,6 +45,13 @@ module test {
 			this.scrollviewBG.x = this.scrollview.x;
 			this.scrollviewBG.y = this.scrollview.y;
 			this.addChild(this.scrollviewBG);
+
+			let euiLayer:eui.UILayer = new eui.UILayer();
+			euiLayer.name = "EUILayer";
+			this.addChild(euiLayer);
+			let sprite:egret.Sprite = new egret.Sprite();
+			sprite.name = "SpriteLayer";
+			this.addChild(sprite);
 		}
 		
 		private initContent(): void {
@@ -51,7 +60,7 @@ module test {
 				let shape = new egret.Shape();
 				shape.name = "" + i;
 				shape.graphics.beginFill(color, 1);
-				shape.graphics.drawRect(120 * i, 50, 100, 300)
+				shape.graphics.drawRect(120 * i, 50, 100, 300);
 				shape.graphics.endFill();
 				shape.touchEnabled = true;
 

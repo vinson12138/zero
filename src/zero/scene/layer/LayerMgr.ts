@@ -1,7 +1,7 @@
 namespace zero {
     export class LayerMgr {
         private static _instance: LayerMgr;
-        private _layers: egret.DisplayObjectContainer[];
+        private _layers: (Layer | EUILayer)[];
 
         private constructor() {
             this._layers = [];
@@ -15,14 +15,14 @@ namespace zero {
         }
 
         /**
-         * 将某个图层添加到场景中
-         * @param {zero.Scene} scene 场景
-         * @param {number} layerID 图层编号
-         * @param {egret.DisplayObject} layer 图层
+         * @param {zero.Scene} scene
+         * @param {number} layerID
+         * @param {zero.Layer | zero.EUILayer} layer
+         * @param {string} layerName 图层的名字 可选（主要调试时会用到）
          */
-        public register(scene: Scene, layerID: number, layer: egret.DisplayObjectContainer, layerName?:string): void {
-            if(layer){
-                layer.name = layerName?layerName:"";
+        public register(scene: Scene, layerID: number, layer: Layer | EUILayer, layerName?: string): void {
+            if (layer) {
+                layer.name = layerName ? layerName : "";
                 scene.addChild(layer);
                 this._layers[layerID] = layer;
             }
@@ -33,22 +33,36 @@ namespace zero {
          * @param {number} layerID
          */
         public unbind(layerID: number): void {
-            let layer:egret.DisplayObjectContainer = this.get(layerID);
-            if(layer && layer.parent){
+            let layer: Layer | EUILayer = this.get(layerID);
+            if (layer && layer.parent) {
                 layer.parent.removeChild(layer);
-                this._layers[layerID] = null;
+                layer = null;
             }
         }
 
         /**
-         * 获取当前活动的场景上的某个图层
-         * @param {number} layerID
-         * @returns {egret.DisplayObject}
+         * 将所有图层与当前活动的场景解绑
          */
-        public get(layerID: number): egret.DisplayObjectContainer {
-            let layer: egret.DisplayObjectContainer = this._layers[layerID];
+        public unbindAll():void {
+            for(let layer of this._layers){
+                if(!layer) continue;
+                if(layer && layer.parent){
+                    layer.parent.removeChild(layer);
+                    layer = null;
+                }
+            }
+            this._layers = [];
+        }
+
+        /**
+         *  获取当前活动的场景上的某个图层
+         * @param {number} layerID
+         * @returns {zero.Layer | zero.EUILayer}
+         */
+        public get(layerID: number): Layer | EUILayer {
+            let layer: Layer | EUILayer = this._layers[layerID];
             if (!layer) {
-                console.warn(`ID为[${layerID}]的图层并未被添加到任何场景上`);
+                console.warn(`ID为[${layerID}]的图层并未不存在`);
                 layer = null;
             }
             return layer;

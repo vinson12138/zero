@@ -2,16 +2,12 @@ namespace example {
     /**
      * 场景图层的编号枚举
      */
-    export enum LayerID {
-        /**
-         * 地图层
-         */
-        MAP = 0,
+    export enum BaseLayerID {
         /**
          * UI层，主界面的显示于交互，一般位于最底层
          * @type {number}
          */
-        MAIN_UI = 8,
+        UI = 0,
         /**
          * 弹出层 主要为弹出的对话框
          * @type {number}

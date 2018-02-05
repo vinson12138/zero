@@ -9,11 +9,11 @@ var game_file_list = [
 	"libs/modules/tween/tween.js",
 	"bin-debug/zero/scene/Scene.js",
 	"bin-debug/game/controller/Controller.js",
+	"bin-debug/zero/scene/layer/EUILayer.js",
+	"bin-debug/zero/scene/layer/Layer.js",
 	"bin-debug/zero/scene/layer/LayerMgr.js",
 	"bin-debug/zero/scene/SceneMgr.js",
 	"bin-debug/zero/utils/System.js",
-	"bin-debug/example/scenes/LoginScene.js",
-	"bin-debug/AssetAdapter.js",
 	"bin-debug/game/controller/Login.js",
 	"bin-debug/game/controller/Startup.js",
 	"bin-debug/game/controller/TestScrollView.js",
@@ -31,6 +31,8 @@ var game_file_list = [
 	"bin-debug/example/hub/views/HubMain.js",
 	"bin-debug/example/login/views/LoginMain.js",
 	"bin-debug/example/scenes/HubScene.js",
+	"bin-debug/example/scenes/LoginScene.js",
+	"bin-debug/AssetAdapter.js",
 	"bin-debug/example/constants/LayerConst.js",
 	//----auto game_file_list end----
 ];

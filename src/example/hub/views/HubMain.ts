@@ -1,5 +1,6 @@
 module example {
-    export class HubMain extends eui.Component implements eui.UIComponent {
+    import EUILayer = zero.EUILayer;
+    export class HubMain extends EUILayer {
         public _btnGame: eui.Button;
         public _btnShop: eui.Button;
         public _btnAsset: eui.Button;
@@ -27,37 +28,37 @@ module example {
 
         private onTouch(e: egret.TouchEvent): void {
             if (e.target === this._btnShop) {
-                zero.layerMgr.get(LayerID.POPUP).removeChildren();
+                zero.layerMgr.get(HubScene.POPUP).removeChildren();
 
                 let shop = new eui.Panel();
                 shop.name = "shop";
                 shop.width = 800;
                 shop.height = 500;
                 shop.title = "商店";
-                shop.horizontalCenter = 1;
-                shop.verticalCenter = 1;
+                shop.horizontalCenter = 0;
+                shop.verticalCenter = 0;
 
-                zero.layerMgr.get(LayerID.POPUP).addChild(shop);
+                zero.layerMgr.get(HubScene.POPUP).addChild(shop);
 
                 return;
             }
             if (e.target === this._btnAsset) {
-                zero.layerMgr.get(LayerID.POPUP).removeChildren();
+                zero.layerMgr.get(HubScene.POPUP).removeChildren();
 
                 let asset = new eui.Panel();
                 asset.name = "asset";
                 asset.width = 600;
                 asset.height = 360;
                 asset.title = "资产";
-                asset.horizontalCenter = 1;
-                asset.verticalCenter = 1;
+                asset.horizontalCenter = 0;
+                asset.verticalCenter = 0;
 
-                zero.layerMgr.get(LayerID.POPUP).addChild(asset);
+                zero.layerMgr.get(HubScene.POPUP).addChild(asset);
 
                 return;
             }
             if (e.target === this._btnSetting) {
-                zero.layerMgr.get(LayerID.POPUP).removeChildren();
+                zero.layerMgr.get(HubScene.POPUP).removeChildren();
 
                 zero.sceneMgr.load(example.LoginScene);
 

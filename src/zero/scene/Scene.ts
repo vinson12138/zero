@@ -4,13 +4,26 @@ namespace zero {
      * 每个场景应该负责资源的加载和释放
      */
     export abstract class Scene extends eui.UILayer {
+        /**
+         * 资源组名
+         */
         public groupName:string;
+        /**
+         * 卸载场景时，是否自动释放资源
+         * @type {boolean}
+         */
+        public autoReleaseResource:boolean = false;
+
         public constructor() {
             super();
             this.touchEnabled = false;
             this.touchChildren = true;
 
         }
+
+        /**
+         * 预加载场景
+         */
         public preload():void {
             if(!this.groupName) return;
 
@@ -38,19 +51,24 @@ namespace zero {
          * 卸载场景
          */
         public unload(): void {
-            console.log("销毁类");
+            console.log("销毁类的实例_"+egret.getQualifiedClassName(this));
             this.$children.forEach(node => {
             	node = null;
             });
             this.removeChildren();
+
+            if(this.autoReleaseResource){
+                RES.destroyRes(this.groupName);
+            }
         }
+
 
         protected onLoadComplete():void {
             let loading:ILoadingUI = zero.loadingMgr.getLoadingUI();
             if(loading) loading.hide();
         }
 
-        private onLoadProgress(e:RES.ResourceEvent):void {
+        protected onLoadProgress(e:RES.ResourceEvent):void {
             let loading:ILoadingUI = zero.loadingMgr.getLoadingUI();
             if(loading) loading.setProgress(e.itemsLoaded, e.itemsTotal);
         }

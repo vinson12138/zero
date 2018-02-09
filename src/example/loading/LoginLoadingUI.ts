@@ -18,6 +18,10 @@ namespace example {
 
             this.width = 1280;
             this.height = 720;
+        }
+
+        protected childrenCreated(): void {
+            super.childrenCreated();
 
             let bg = new egret.Bitmap();
             bg.texture = RES.getRes('newResult_bg_jpg');
@@ -28,8 +32,8 @@ namespace example {
             this.progress = new egret.TextField();
             this.progress.x = 100;
             this.progress.y = 100;
-            this.progress.textColor = 0xffff00;
             this.progress.size = 40;
+            this.progress.textColor = 0xffff00;
             this.addChild(this.progress);
         }
 

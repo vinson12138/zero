@@ -7,9 +7,10 @@ class Main extends eui.UILayer {
         egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
         egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
         //初始化Resource资源加载库
-            RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
+        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         RES.loadConfig("resource/default.res.json", "resource/");
     }
+
     /**
      * 配置文件加载完成,开始预加载皮肤主题资源和preload资源组。
      * Loading of configuration file is complete, start to pre-load the theme configuration file and the preload resource group
@@ -20,10 +21,11 @@ class Main extends eui.UILayer {
         let theme = new eui.Theme("resource/default.thm.json", this.stage);
         theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
 
-        zero.ResUtils.loadGroup('loading', this.onLoadProgress,  this.onLoadComplete, null, this);
+        zero.ResUtils.loadGroup('loading', this.onLoadProgress, this.onLoadComplete, null, this);
     }
 
     private isThemeLoadEnd: boolean = false;
+
     /**
      * 主题文件加载完成,开始预加载
      * Loading of theme configuration file is complete, start to pre-load the
@@ -32,27 +34,33 @@ class Main extends eui.UILayer {
         this.isThemeLoadEnd = true;
         this.createScene();
     }
+
     private isResourceLoadEnd: boolean = false;
 
-    private onLoadProgress(e: RES.ResourceEvent):void {
+    private onLoadProgress(e: RES.ResourceEvent): void {
         console.log(`----加载进度----${e.itemsLoaded}/${e.itemsTotal}`);
     }
-    private onLoadComplete():void {
+
+    private onLoadComplete(): void {
         this.isResourceLoadEnd = true;
         this.createScene();
     }
+
     private createScene() {
         if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
             this.startCreateScene();
         }
     }
+
     /**
      * 创建场景界面
      * Create scene interface
      */
     protected startCreateScene(): void {
-        zero.loadingMgr.setLoadingUI(new example.LoginLoadingUI());
         zero.sceneMgr.sceneContainer = this.stage;
+        zero.loadingMgr.setLoadingUI(new example.LoginLoadingUI());
         zero.sceneMgr.load(example.LoginScene);
     }
+
 }
+

@@ -1,6 +1,6 @@
 module example {
     import EUILayer = zero.EUILayer;
-    export class HubMain extends EUILayer {
+    export class HubMainView extends EUILayer {
         public _btnGame: eui.Button;
         public _btnShop: eui.Button;
         public _btnAsset: eui.Button;
@@ -61,7 +61,6 @@ module example {
                 zero.layerMgr.get(HubScene.POPUP).removeChildren();
 
                 zero.sceneMgr.load(example.LoginScene);
-
             }
 
         }

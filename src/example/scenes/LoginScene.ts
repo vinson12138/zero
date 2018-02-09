@@ -9,7 +9,7 @@ namespace example {
         public constructor(){
             super();
 
-            zero.layerMgr.register(this, LoginScene.UI, new LoginMain(), "UI层");
+            zero.layerMgr.register(this, LoginScene.UI, new LoginMainView(), "UI层");
             zero.layerMgr.register(this, LoginScene.POPUP, new EUILayer());
             zero.layerMgr.register(this, LoginScene.TIP, new EUILayer());
 

@@ -1,5 +1,5 @@
 module example {
-	export class LoginMain extends zero.EUILayer {
+	export class LoginMainView extends zero.EUILayer {
 		private _btnLogin:eui.Button;
 		private _btnSetting:eui.Button;
 

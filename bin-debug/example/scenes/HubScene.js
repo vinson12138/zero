@@ -9,17 +9,43 @@ var __extends = (this && this.__extends) || function (d, b) {
 var example;
 (function (example) {
     var Scene = zero.Scene;
+    var Layer = zero.Layer;
+    var EUILayer = zero.EUILayer;
+    var Controller = zero.Controller;
     var HubScene = (function (_super) {
         __extends(HubScene, _super);
         function HubScene() {
             var _this = _super.call(this) || this;
-            zero.layerMgr.register(_this, example.LayerID.MAIN_UI, new example.HubMain(), "UI");
-            zero.layerMgr.register(_this, example.LayerID.POPUP, new egret.DisplayObjectContainer());
-            zero.layerMgr.register(_this, example.LayerID.TIP, null);
+            var hubMainView = new example.HubMainView();
+            zero.layerMgr.register(_this, HubScene.UI, hubMainView, "UI");
+            zero.layerMgr.register(_this, HubScene.POPUP, new Layer());
+            zero.layerMgr.register(_this, HubScene.TIP, new EUILayer(), "提示层");
+            _this.autoReleaseResource = true;
+            zero.notificationCenter.attach(new HubMainController(hubMainView));
             return _this;
         }
         return HubScene;
     }(Scene));
+    HubScene.UI = 0;
+    HubScene.POPUP = 1;
+    HubScene.TIP = 2;
     example.HubScene = HubScene;
     __reflect(HubScene.prototype, "example.HubScene");
+    var HubMainController = (function (_super) {
+        __extends(HubMainController, _super);
+        function HubMainController() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        HubMainController.prototype.onRemove = function () {
+            _super.prototype.onRemove.call(this);
+        };
+        HubMainController.prototype.notificationList = function () {
+            return [];
+        };
+        HubMainController.prototype.handleNotification = function (notification) {
+        };
+        return HubMainController;
+    }(Controller));
+    example.HubMainController = HubMainController;
+    __reflect(HubMainController.prototype, "example.HubMainController");
 })(example || (example = {}));

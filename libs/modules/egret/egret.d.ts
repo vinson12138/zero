@@ -3808,7 +3808,7 @@ declare namespace egret {
          * Crop designated area and save it as image.
          * native support only "image / png" and "image / jpeg"; Web browser because of the various implementations are not the same, it is recommended to use only these two kinds.
          * @param type Type conversions, such as "image / png"
-         * @param filePath The path name of the image (the home directory for the game's private space, the path can not have "../",Web supports only pass names.)
+         * @param filePath The path name of the image (the home directory for the game-deprecated's private space, the path can not have "../",Web supports only pass names.)
          * @param rect The need to convert the area
          * @version Egret 2.4
          * @platform Native

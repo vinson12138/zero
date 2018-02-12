@@ -8,29 +8,29 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var example;
 (function (example) {
-    var LoginMain = (function (_super) {
-        __extends(LoginMain, _super);
-        function LoginMain() {
+    var LoginMainView = (function (_super) {
+        __extends(LoginMainView, _super);
+        function LoginMainView() {
             var _this = _super.call(this) || this;
             _this.skinName = "LoginMainSkin";
             _this.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.onTouch, _this);
             return _this;
         }
-        LoginMain.prototype.partAdded = function (partName, instance) {
+        LoginMainView.prototype.partAdded = function (partName, instance) {
             _super.prototype.partAdded.call(this, partName, instance);
         };
-        LoginMain.prototype.childrenCreated = function () {
+        LoginMainView.prototype.childrenCreated = function () {
             _super.prototype.childrenCreated.call(this);
             this._btnLogin.touchChildren = false;
             this._btnSetting.touchChildren = false;
         };
-        LoginMain.prototype.onTouch = function (e) {
+        LoginMainView.prototype.onTouch = function (e) {
             if (e.target === this._btnLogin) {
                 zero.sceneMgr.load(example.HubScene);
             }
         };
-        return LoginMain;
-    }(eui.Component));
-    example.LoginMain = LoginMain;
-    __reflect(LoginMain.prototype, "example.LoginMain", ["eui.UIComponent", "egret.DisplayObject"]);
+        return LoginMainView;
+    }(zero.EUILayer));
+    example.LoginMainView = LoginMainView;
+    __reflect(LoginMainView.prototype, "example.LoginMainView");
 })(example || (example = {}));

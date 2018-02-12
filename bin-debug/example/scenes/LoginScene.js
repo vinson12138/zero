@@ -9,17 +9,22 @@ var __extends = (this && this.__extends) || function (d, b) {
 var example;
 (function (example) {
     var Scene = zero.Scene;
+    var EUILayer = zero.EUILayer;
     var LoginScene = (function (_super) {
         __extends(LoginScene, _super);
         function LoginScene() {
             var _this = _super.call(this) || this;
-            zero.layerMgr.register(_this, example.LayerID.MAIN_UI, new example.LoginMain(), "UI层");
-            zero.layerMgr.register(_this, example.LayerID.POPUP, new egret.DisplayObjectContainer());
-            zero.layerMgr.register(_this, example.LayerID.TIP, null);
+            zero.layerMgr.register(_this, LoginScene.UI, new example.LoginMainView(), "UI层");
+            zero.layerMgr.register(_this, LoginScene.POPUP, new EUILayer());
+            zero.layerMgr.register(_this, LoginScene.TIP, new EUILayer());
+            _this.groupName = 'preload';
             return _this;
         }
         return LoginScene;
     }(Scene));
+    LoginScene.UI = 0;
+    LoginScene.POPUP = 1;
+    LoginScene.TIP = 2;
     example.LoginScene = LoginScene;
     __reflect(LoginScene.prototype, "example.LoginScene");
 })(example || (example = {}));

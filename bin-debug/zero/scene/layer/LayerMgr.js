@@ -14,10 +14,10 @@ var zero;
             return this._instance;
         };
         /**
-         * 将某个图层添加到场景中
-         * @param {zero.Scene} scene 场景
-         * @param {number} layerID 图层编号
-         * @param {egret.DisplayObject} layer 图层
+         * @param {zero.Scene} scene
+         * @param {number} layerID
+         * @param {zero.Layer | zero.EUILayer} layer
+         * @param {string} layerName 图层的名字 可选（主要调试时会用到）
          */
         LayerMgr.prototype.register = function (scene, layerID, layer, layerName) {
             if (layer) {
@@ -34,18 +34,33 @@ var zero;
             var layer = this.get(layerID);
             if (layer && layer.parent) {
                 layer.parent.removeChild(layer);
-                this._layers[layerID] = null;
+                layer = null;
             }
         };
         /**
-         * 获取当前活动的场景上的某个图层
+         * 将所有图层与当前活动的场景解绑
+         */
+        LayerMgr.prototype.unbindAll = function () {
+            for (var _i = 0, _a = this._layers; _i < _a.length; _i++) {
+                var layer = _a[_i];
+                if (!layer)
+                    continue;
+                if (layer && layer.parent) {
+                    layer.parent.removeChild(layer);
+                    layer = null;
+                }
+            }
+            this._layers = [];
+        };
+        /**
+         *  获取当前活动的场景上的某个图层
          * @param {number} layerID
-         * @returns {egret.DisplayObject}
+         * @returns {zero.Layer | zero.EUILayer}
          */
         LayerMgr.prototype.get = function (layerID) {
             var layer = this._layers[layerID];
             if (!layer) {
-                console.warn("ID\u4E3A[" + layerID + "]\u7684\u56FE\u5C42\u5E76\u672A\u88AB\u6DFB\u52A0\u5230\u4EFB\u4F55\u573A\u666F\u4E0A");
+                console.warn("ID\u4E3A[" + layerID + "]\u7684\u56FE\u5C42\u5E76\u672A\u4E0D\u5B58\u5728");
                 layer = null;
             }
             return layer;

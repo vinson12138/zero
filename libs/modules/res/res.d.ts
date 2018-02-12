@@ -418,7 +418,7 @@ declare namespace RES {
          * Get the actual URL of the resource file.<br/>
          * Because this method needs to be called to control the actual version of the URL have the original resource files were changed, so would like to get the specified resource file the actual URL.<br/>
          * In the development and debugging phase, this method will directly return value passed.
-         * @param url Url used in the game
+         * @param url Url used in the game-deprecated
          * @returns Actual loaded url
          * @version Egret 2.4
          * @platform Web,Native

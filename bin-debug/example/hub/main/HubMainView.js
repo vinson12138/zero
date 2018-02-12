@@ -8,56 +8,57 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var example;
 (function (example) {
-    var HubMain = (function (_super) {
-        __extends(HubMain, _super);
-        function HubMain() {
+    var EUILayer = zero.EUILayer;
+    var HubMainView = (function (_super) {
+        __extends(HubMainView, _super);
+        function HubMainView() {
             var _this = _super.call(this) || this;
             _this.skinName = "HubMainSkin";
             _this.addEventListener(egret.TouchEvent.TOUCH_TAP, _this.onTouch, _this);
             return _this;
         }
-        HubMain.prototype.partAdded = function (partName, instance) {
+        HubMainView.prototype.partAdded = function (partName, instance) {
             _super.prototype.partAdded.call(this, partName, instance);
         };
-        HubMain.prototype.childrenCreated = function () {
+        HubMainView.prototype.childrenCreated = function () {
             _super.prototype.childrenCreated.call(this);
             this._btnAsset.touchChildren = false;
             this._btnShop.touchChildren = false;
             this._btnGame.touchChildren = false;
             this._btnSetting.touchChildren = false;
         };
-        HubMain.prototype.onTouch = function (e) {
+        HubMainView.prototype.onTouch = function (e) {
             if (e.target === this._btnShop) {
-                zero.layerMgr.get(example.LayerID.POPUP).removeChildren();
+                zero.layerMgr.get(example.HubScene.POPUP).removeChildren();
                 var shop = new eui.Panel();
                 shop.name = "shop";
                 shop.width = 800;
                 shop.height = 500;
                 shop.title = "商店";
-                shop.horizontalCenter = 1;
-                shop.verticalCenter = 1;
-                zero.layerMgr.get(example.LayerID.POPUP).addChild(shop);
+                shop.horizontalCenter = 0;
+                shop.verticalCenter = 0;
+                zero.layerMgr.get(example.HubScene.POPUP).addChild(shop);
                 return;
             }
             if (e.target === this._btnAsset) {
-                zero.layerMgr.get(example.LayerID.POPUP).removeChildren();
+                zero.layerMgr.get(example.HubScene.POPUP).removeChildren();
                 var asset = new eui.Panel();
                 asset.name = "asset";
                 asset.width = 600;
                 asset.height = 360;
                 asset.title = "资产";
-                asset.horizontalCenter = 1;
-                asset.verticalCenter = 1;
-                zero.layerMgr.get(example.LayerID.POPUP).addChild(asset);
+                asset.horizontalCenter = 0;
+                asset.verticalCenter = 0;
+                zero.layerMgr.get(example.HubScene.POPUP).addChild(asset);
                 return;
             }
             if (e.target === this._btnSetting) {
-                zero.layerMgr.get(example.LayerID.POPUP).removeChildren();
+                zero.layerMgr.get(example.HubScene.POPUP).removeChildren();
                 zero.sceneMgr.load(example.LoginScene);
             }
         };
-        return HubMain;
-    }(eui.Component));
-    example.HubMain = HubMain;
-    __reflect(HubMain.prototype, "example.HubMain", ["eui.UIComponent", "egret.DisplayObject"]);
+        return HubMainView;
+    }(EUILayer));
+    example.HubMainView = HubMainView;
+    __reflect(HubMainView.prototype, "example.HubMainView");
 })(example || (example = {}));

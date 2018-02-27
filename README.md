@@ -25,7 +25,6 @@ ModelB1-->ControllerB1
 
 LayerB2-->ControllerB2
 ModelB2-->ControllerB2
-
 ```
 ## 二、场景的切换
 使用`SceneMgr.load(sceneClassName)`来控制场景的切换，当然何时切换场景，以及切换到哪个场景一般都是由场景内的某个`Controller`来控制的。

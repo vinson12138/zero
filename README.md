@@ -25,12 +25,11 @@ ModelB1-->ControllerB1
 
 LayerB2-->ControllerB2
 ModelB2-->ControllerB2
-
 ```
 ## 二、场景的切换
 使用`SceneMgr.load(sceneClassName)`来控制场景的切换，当然何时切换场景，以及切换到哪个场景一般都是由场景内的某个`Controller`来控制的。
 
-## `View`与`Controller`如何通信?
+## 三、`View`与`Controller`如何通信?
 **2.1 `Controller`向`View`通信**
 
 每个`Controller`都会保存对应`View`的实例，因此`Controller`是可以很方便地调用`View`类中的方法。
@@ -39,11 +38,11 @@ ModelB2-->ControllerB2
 
 `View`向`Controller`通信则是通过事件派发实现的。在`Controller`中对`View`添加可能的事件监听，然后在`View`中执行某些交互操作时，派发相应的事件。这样`Controller`就能处理`View`上的操作了。
 
-## 三、全局与`Controller`如何通信?
+## 四、全局与`Controller`如何通信?
 这里的全局一般指的是服务器传来某些消息，需要通过某些`Controller`来更新`View`。对此，zero使用了观察者模式来实现这个功能。
 
 有一个名为`NotificationCenter`的被观察者类，这个类负责发出服务器传来的消息通知，注册到`NotificationCenter`上，并且订阅了通知的观测者类（也是`Controller`）就会得到通知，并进行处理。
 
-## 四、`Controller`与`Controller`如何通信?
+## 五、`Controller`与`Controller`如何通信?
 某个`Controller A`如果想向`Controller B`通信，则需要通过`NotificationCenter`获取到这个`Controller B`，然后调用`B.handleNotification()`方法来通知`B`处理某个消息。
 

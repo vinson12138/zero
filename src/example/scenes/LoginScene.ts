@@ -8,13 +8,13 @@ namespace example {
 
         public constructor(){
             super();
-
+            this.groupName = 'preload';
+        }
+        protected onLoadComplete():void {
+            super.onLoadComplete();
             zero.layerMgr.register(this, LoginScene.UI, new LoginMainView(), "UI层");
             zero.layerMgr.register(this, LoginScene.POPUP, new EUILayer());
             zero.layerMgr.register(this, LoginScene.TIP, new EUILayer());
-
-            this.groupName = 'preload';
         }
-
     }
 }

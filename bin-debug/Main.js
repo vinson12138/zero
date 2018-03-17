@@ -44,7 +44,7 @@ var Main = (function (_super) {
         this.createScene();
     };
     Main.prototype.onLoadProgress = function (e) {
-        console.log("----\u52A0\u8F7D\u8FDB\u5EA6----" + e.itemsLoaded + "/" + e.itemsTotal);
+        console.log("----loading\u8D44\u6E90 \u52A0\u8F7D\u8FDB\u5EA6----" + e.itemsLoaded + "/" + e.itemsTotal);
     };
     Main.prototype.onLoadComplete = function () {
         this.isResourceLoadEnd = true;
@@ -60,8 +60,11 @@ var Main = (function (_super) {
      * Create scene interface
      */
     Main.prototype.startCreateScene = function () {
+        zero.System.width = 1280;
+        zero.System.height = 720;
         zero.sceneMgr.sceneContainer = this.stage;
         zero.loadingMgr.setLoadingUI(new example.LoginLoadingUI());
+        //启动时进入的场景
         zero.sceneMgr.load(example.LoginScene);
     };
     return Main;

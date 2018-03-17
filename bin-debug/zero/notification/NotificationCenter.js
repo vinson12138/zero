@@ -27,6 +27,7 @@ var zero;
          */
         NotificationCenter.prototype.attach = function (observer) {
             this._observers.put(egret.getQualifiedClassName(observer), observer);
+            console.log("name", observer.NAME);
         };
         /**
          * 发出通知
@@ -40,11 +41,20 @@ var zero;
                 var observer = observers_1[_i];
                 if (!observer)
                     return;
+                //只给订阅了此消息的观察者，发出通知
                 var notificationList = observer.notificationList();
                 if (!notificationList || notificationList.indexOf(name) < 0)
                     return;
                 observer.handleNotification(notification);
             }
+        };
+        /**
+         * 获取指定类名的Controller
+         * @param {string} name
+         * @returns {zero.Controller}
+         */
+        NotificationCenter.prototype.getController = function (name) {
+            return this._observers.get(name);
         };
         NotificationCenter.prototype.onRemove = function () {
             var observers = this._observers.values;

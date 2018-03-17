@@ -3,7 +3,8 @@ namespace zero {
     /**
      * Controller类
      */
-    export abstract class Controller {
+    export abstract class Controller{
+        public NAME: string = 'Controller';
         private _view: Layer | EUILayer;
 
         /**

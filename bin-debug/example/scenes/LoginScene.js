@@ -14,12 +14,15 @@ var example;
         __extends(LoginScene, _super);
         function LoginScene() {
             var _this = _super.call(this) || this;
-            zero.layerMgr.register(_this, LoginScene.UI, new example.LoginMainView(), "UI层");
-            zero.layerMgr.register(_this, LoginScene.POPUP, new EUILayer());
-            zero.layerMgr.register(_this, LoginScene.TIP, new EUILayer());
             _this.groupName = 'preload';
             return _this;
         }
+        LoginScene.prototype.onLoadComplete = function () {
+            _super.prototype.onLoadComplete.call(this);
+            zero.layerMgr.register(this, LoginScene.UI, new example.LoginMainView(), "UI层");
+            zero.layerMgr.register(this, LoginScene.POPUP, new EUILayer());
+            zero.layerMgr.register(this, LoginScene.TIP, new EUILayer());
+        };
         return LoginScene;
     }(Scene));
     LoginScene.UI = 0;

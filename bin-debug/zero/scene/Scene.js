@@ -29,8 +29,10 @@ var zero;
          * 预加载场景
          */
         Scene.prototype.preload = function () {
-            if (!this.groupName)
+            if (!this.groupName) {
+                this.onLoadComplete();
                 return;
+            }
             var loading = zero.loadingMgr.getLoadingUI();
             if (loading)
                 loading.show();

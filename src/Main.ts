@@ -38,7 +38,7 @@ class Main extends eui.UILayer {
     private isResourceLoadEnd: boolean = false;
 
     private onLoadProgress(e: RES.ResourceEvent): void {
-        console.log(`----加载进度----${e.itemsLoaded}/${e.itemsTotal}`);
+        console.log(`----loading资源 加载进度----${e.itemsLoaded}/${e.itemsTotal}`);
     }
 
     private onLoadComplete(): void {
@@ -57,8 +57,11 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected startCreateScene(): void {
+        zero.System.width = 1280;
+        zero.System.height = 720;
         zero.sceneMgr.sceneContainer = this.stage;
         zero.loadingMgr.setLoadingUI(new example.LoginLoadingUI());
+        //启动时进入的场景
         zero.sceneMgr.load(example.LoginScene);
     }
 

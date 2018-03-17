@@ -12,6 +12,7 @@ var zero;
          * 构造函数
          */
         function Controller(view) {
+            this.NAME = 'Controller';
             this._view = view;
         }
         Controller.prototype.onRemove = function () {

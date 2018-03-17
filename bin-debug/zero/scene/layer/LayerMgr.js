@@ -17,7 +17,7 @@ var zero;
          * @param {zero.Scene} scene
          * @param {number} layerID
          * @param {zero.Layer | zero.EUILayer} layer
-         * @param {string} layerName 图层的名字 可选（主要调试时会用到）
+         * @param {string} layerName 图层的名字 可选
          */
         LayerMgr.prototype.register = function (scene, layerID, layer, layerName) {
             if (layer) {

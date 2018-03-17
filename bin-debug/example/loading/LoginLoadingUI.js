@@ -21,17 +21,16 @@ var example;
          */
         function LoginLoadingUI() {
             var _this = _super.call(this) || this;
-            _this.width = 1280;
-            _this.height = 720;
+            _this.skinName = 'LoadingUI';
             return _this;
         }
         LoginLoadingUI.prototype.childrenCreated = function () {
             _super.prototype.childrenCreated.call(this);
-            var bg = new egret.Bitmap();
-            bg.texture = RES.getRes('newResult_bg_jpg');
-            bg.width = this.width;
-            bg.height = this.height;
-            this.addChild(bg);
+            // let bg = new egret.Bitmap();
+            // bg.texture = RES.getRes('newResult_bg_jpg');
+            // bg.width = this.width;
+            // bg.height = this.height;
+            // this.addChild(bg);
             this.progress = new egret.TextField();
             this.progress.x = 100;
             this.progress.y = 100;

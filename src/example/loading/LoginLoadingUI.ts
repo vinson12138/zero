@@ -16,18 +16,18 @@ namespace example {
         public constructor() {
             super();
 
-            this.width = 1280;
-            this.height = 720;
+            this.skinName = 'LoadingUI';
+
         }
 
         protected childrenCreated(): void {
             super.childrenCreated();
 
-            let bg = new egret.Bitmap();
-            bg.texture = RES.getRes('newResult_bg_jpg');
-            bg.width = this.width;
-            bg.height = this.height;
-            this.addChild(bg);
+            // let bg = new egret.Bitmap();
+            // bg.texture = RES.getRes('newResult_bg_jpg');
+            // bg.width = this.width;
+            // bg.height = this.height;
+            // this.addChild(bg);
 
             this.progress = new egret.TextField();
             this.progress.x = 100;

@@ -25,7 +25,10 @@ namespace zero {
          * 预加载场景
          */
         public preload():void {
-            if(!this.groupName) return;
+            if(!this.groupName) {
+                this.onLoadComplete();
+                return;
+            }
 
             let loading:ILoadingUI = zero.loadingMgr.getLoadingUI();
             if(loading)loading.show();
@@ -72,8 +75,5 @@ namespace zero {
             let loading:ILoadingUI = zero.loadingMgr.getLoadingUI();
             if(loading) loading.setProgress(e.itemsLoaded, e.itemsTotal);
         }
-
-
-
     }
 }

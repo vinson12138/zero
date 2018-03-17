@@ -34,6 +34,7 @@ namespace zero {
          */
         public attach(observer: Controller): void {
             this._observers.put(egret.getQualifiedClassName(observer), observer);
+            console.log("name", observer.NAME);
         }
 
         /**
@@ -46,7 +47,7 @@ namespace zero {
             let observers: Controller[] = this._observers.values;
             for (let observer of observers) {
                 if (!observer) return;
-
+                //只给订阅了此消息的观察者，发出通知
                 let notificationList: string[] = observer.notificationList();
                 if (!notificationList || notificationList.indexOf(name) < 0)
                     return;
@@ -55,7 +56,16 @@ namespace zero {
             }
         }
 
-        public onRemove():void {
+        /**
+         * 获取指定类名的Controller
+         * @param {string} name
+         * @returns {zero.Controller}
+         */
+        public getController(name: string): Controller {
+            return this._observers.get(name);
+        }
+
+        public onRemove(): void {
             let observers: Controller[] = this._observers.values;
             for (let observer of observers) {
                 if (!observer) return;

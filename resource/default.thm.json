@@ -31,7 +31,9 @@
     "resource/eui_skins/ToggleSwitchSkin.exml",
     "resource/eui_skins/VScrollBarSkin.exml",
     "resource/eui_skins/VSliderSkin.exml",
+    "resource/game_skins/GameUI.exml",
     "resource/game_skins/HubMain.exml",
+    "resource/game_skins/LoadingUI.exml",
     "resource/game_skins/LoginMain.exml"
   ]
 }

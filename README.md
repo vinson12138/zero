@@ -48,14 +48,14 @@ ModelB2-->ControllerB2
 
 ## 示例Demo
 
-APK: https://github.com/Neo12138/zero/proj.app/app-release-unaligned.apk
+APK: https://github.com/Neo12138/zero/tree/master/proj.app/app-release-unaligned.apk
 
 游戏大厅界面
 
-![image](https://github.com/Neo12138/zero/proj.app/images/zero.rpg.main.png)
+![image](https://github.com/Neo12138/zero/tree/master/proj.app/images/zero.rpg.main.png)
 
 游戏内
 
-![image](https://github.com/Neo12138/zero/proj.app/images/zero.rpg.game.png)
+![image](https://github.com/Neo12138/zero/tree/master/proj.app/images/zero.rpg.game.png)
 
 

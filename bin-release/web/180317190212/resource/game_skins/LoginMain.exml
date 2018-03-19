@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="LoginMainSkin" width="1280" height="720" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
-	<w:Config id="1612c31b7ca" ></w:Config>
-	<e:Image source="bg_loading1_jpg" left="0" top="0" right="0" bottom="0"/>
-	<e:Button id="_btnLogin" label="Login" anchorOffsetX="0" width="142" anchorOffsetY="0" height="65" horizontalCenter="0" bottom="160"/>
-	<e:Button id="_btnSetting" label="Notice" width="80" right="24" top="24"/>
-</e:Skin>

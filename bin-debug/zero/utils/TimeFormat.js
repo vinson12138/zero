@@ -75,26 +75,26 @@ var zero;
                 }
                 return d + "天 " + h + "小时 " + m + "分钟 " + s + "秒";
             };
+            TimeFormat.AGO = {
+                year: "年前",
+                month: "个月前",
+                day: "天前",
+                oneDay: "昨天",
+                hour: "小时前",
+                minute: "分钟前",
+                second: "刚刚"
+            };
+            TimeFormat.LATER = {
+                year: "年后",
+                month: "个月后",
+                day: "天后",
+                oneDay: "明天",
+                hour: "小时后",
+                minute: "分钟后",
+                second: "秒后"
+            };
             return TimeFormat;
         }());
-        TimeFormat.AGO = {
-            year: "年前",
-            month: "个月前",
-            day: "天前",
-            oneDay: "昨天",
-            hour: "小时前",
-            minute: "分钟前",
-            second: "刚刚"
-        };
-        TimeFormat.LATER = {
-            year: "年后",
-            month: "个月后",
-            day: "天后",
-            oneDay: "明天",
-            hour: "小时后",
-            minute: "分钟后",
-            second: "秒后"
-        };
         utils.TimeFormat = TimeFormat;
         __reflect(TimeFormat.prototype, "zero.utils.TimeFormat");
     })(utils = zero.utils || (zero.utils = {}));

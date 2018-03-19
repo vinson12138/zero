@@ -1,7 +1,7 @@
 {
 	"native": {
 		"path_ignore": [],
-		"android_as_path": "D:/zero"
+		"android_as_path": "../../../appes/zero"
 	},
 	"publish": {
 		"web": 0,

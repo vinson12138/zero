@@ -1,5 +1,4 @@
 class Main extends eui.UILayer {
-
     protected createChildren(): void {
         super.createChildren();
         //注入自定义的素材解析器
@@ -57,6 +56,7 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected startCreateScene(): void {
+        this.stage.orientation = egret.OrientationMode.LANDSCAPE;
         zero.System.width = 1280;
         zero.System.height = 720;
         zero.sceneMgr.sceneContainer = this.stage;

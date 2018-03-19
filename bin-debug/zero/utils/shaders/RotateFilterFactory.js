@@ -40,18 +40,18 @@ var zero;
         RotateFilterFactory.yRotateFragmentSrc = function () {
             return "\n            precision lowp float;\n            varying vec2 vTextureCoord;\n            \n            uniform sampler2D uSampler;\n            uniform float angle;\n            uniform bool clockwise;\n\n            void main() {\n                vec2 coord = vTextureCoord.xy;\n                float scale, radian, cosVal, tx, ty;\n                \n                scale = angle >= 90.0 ? 0.4 * (2.0 - angle / 90.0) : 0.4 * angle / 90.0;\n                radian = radians(angle);\n                cosVal = clockwise ? cos(radian) : -cos(radian);\n                \n                tx = (coord.x - 0.5) / cosVal;\n                if(coord.x <= 0.5) {\n                    tx += 0.5;\n                    if (tx < 0.0) return ;\n                    \n                    ty = (0.5 - tx) * scale;\n                    coord.x = cosVal < 0.0 ? 1.0 - tx : tx;\n                    coord.y = (ty + coord.y) / (1.0 + 2.0 * ty);\n                    gl_FragColor = texture2D(uSampler, coord);\n                } \n                else {\n                    if(tx > 0.5) return; \n                    \n                    ty = tx * scale;\n                    coord.x = cosVal < 0.0 ? 0.5 - tx : 0.5 + tx;\n                    coord.y = (coord.y - ty) / (1.0 - 2.0 * ty);\n                    gl_FragColor = texture2D(uSampler, coord);\n                }\n            }\n            ";
         };
+        /**
+         * 以X轴为旋转轴，即垂直旋转
+         * @type {number}
+         */
+        RotateFilterFactory.X = 1;
+        /**
+         * 以Y轴为旋转轴，即水平旋转
+         * @type {number}
+         */
+        RotateFilterFactory.Y = 2;
         return RotateFilterFactory;
     }());
-    /**
-     * 以X轴为旋转轴，即垂直旋转
-     * @type {number}
-     */
-    RotateFilterFactory.X = 1;
-    /**
-     * 以Y轴为旋转轴，即水平旋转
-     * @type {number}
-     */
-    RotateFilterFactory.Y = 2;
     zero.RotateFilterFactory = RotateFilterFactory;
     __reflect(RotateFilterFactory.prototype, "zero.RotateFilterFactory");
 })(zero || (zero = {}));

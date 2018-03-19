@@ -46,3 +46,16 @@ ModelB2-->ControllerB2
 ## 五、`Controller`与`Controller`如何通信?
 某个`Controller A`如果想向`Controller B`通信，则需要通过`NotificationCenter`获取到这个`Controller B`，然后调用`B.handleNotification()`方法来通知`B`处理某个消息。
 
+## 示例Demo
+
+APK: https://github.com/Neo12138/zero/proj.app/app-release-unaligned.apk
+
+游戏大厅界面
+
+![image](https://github.com/Neo12138/zero/proj.app/images/zero.rpg.main.png)
+
+游戏内
+
+![image](https://github.com/Neo12138/zero/proj.app/images/zero.rpg.game.png)
+
+

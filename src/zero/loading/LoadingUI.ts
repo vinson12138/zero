@@ -18,13 +18,13 @@ namespace zero {
          * @param {number} index 层级
          */
         public show(index:number = 99):void {
-            zero.sceneMgr.sceneContainer.addChildAt(this, index);
+            zero.sceneMgr.stage.addChildAt(this, index);
         }
 
         /**
          * 将加载界面从父节点移除
          */
-        public hide():void {
+        public remove():void {
             if(this.parent){
                 this.parent.removeChild(this);
             }

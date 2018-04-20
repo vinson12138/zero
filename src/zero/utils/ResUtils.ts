@@ -64,10 +64,12 @@ namespace zero.ResUtils {
         }
 
         private onResourceProgress(e: RES.ResourceEvent): void {
+            if(!this.onLoadProgress) return;
             this.onLoadProgress.call(this.thisObj, e);
         }
 
         private onResourceLoadComplete(e: RES.ResourceEvent): void {
+            if(!this.onLoadComplete) return;
             if (e.groupName == this.groupName) {
                 RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
                 RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);

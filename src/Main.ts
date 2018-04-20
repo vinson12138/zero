@@ -20,7 +20,8 @@ class Main extends eui.UILayer {
         let theme = new eui.Theme("resource/default.thm.json", this.stage);
         theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
 
-        zero.ResUtils.loadGroup('loading', this.onLoadProgress, this.onLoadComplete, null, this);
+        //loading资源组应该尽可能的小，否则黑屏的时间会过长
+        zero.ResUtils.loadGroup('loading', null, this.onLoadComplete, null, this);
     }
 
     private isThemeLoadEnd: boolean = false;
@@ -47,23 +48,30 @@ class Main extends eui.UILayer {
 
     private createScene() {
         if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
+            this.init();
             this.startCreateScene();
         }
     }
+    private init():void {
+        this.stage.orientation = egret.OrientationMode.LANDSCAPE;
+        
+        zero.System.designWidth = 1280;
+        zero.System.designHeight = 720;
+        zero.System.init(this.stage, false);
 
+        zero.sceneMgr.stage = this.stage;
+
+        //egret.localStorage 即使在APP中也可以生效
+        egret.localStorage
+    }
     /**
      * 创建场景界面
      * Create scene interface
      */
-    protected startCreateScene(): void {
-        this.stage.orientation = egret.OrientationMode.LANDSCAPE;
-        zero.System.width = 1280;
-        zero.System.height = 720;
-        zero.sceneMgr.sceneContainer = this.stage;
+    private startCreateScene(): void {
         zero.loadingMgr.setLoadingUI(new example.LoginLoadingUI());
         //启动时进入的场景
         zero.sceneMgr.load(example.LoginScene);
     }
-
 }
 

@@ -7,12 +7,12 @@ namespace zero {
         /**
          * 资源组名
          */
-        public groupName:string;
+        public groupName: string;
         /**
          * 卸载场景时，是否自动释放资源
          * @type {boolean}
          */
-        public autoReleaseResource:boolean = false;
+        public autoReleaseResource: boolean = false;
 
         public constructor() {
             super();
@@ -24,14 +24,14 @@ namespace zero {
         /**
          * 预加载场景
          */
-        public preload():void {
-            if(!this.groupName) {
+        public preload(): void {
+            if (!this.groupName) {
                 this.onLoadComplete();
                 return;
             }
 
-            let loading:ILoadingUI = zero.loadingMgr.getLoadingUI();
-            if(loading)loading.show();
+            let loading: LoadingUI = zero.loadingMgr.getLoadingUI();
+            if (loading) loading.show();
 
             //加载资源
             zero.ResUtils.loadGroup(this.groupName, this.onLoadProgress, this.onLoadComplete, null, this);
@@ -54,26 +54,26 @@ namespace zero {
          * 卸载场景
          */
         public unload(): void {
-            console.log("销毁类的实例_"+egret.getQualifiedClassName(this));
+            console.log("销毁类的实例_" + egret.getQualifiedClassName(this));
             this.$children.forEach(node => {
-            	node = null;
+                node = null;
             });
             this.removeChildren();
 
-            if(this.autoReleaseResource){
+            if (this.autoReleaseResource) {
                 RES.destroyRes(this.groupName);
             }
         }
 
 
-        protected onLoadComplete():void {
-            let loading:ILoadingUI = zero.loadingMgr.getLoadingUI();
-            if(loading) loading.hide();
+        protected onLoadComplete(): void {
+            let loading: LoadingUI = zero.loadingMgr.getLoadingUI();
+            if (loading) loading.remove();
         }
 
-        protected onLoadProgress(e:RES.ResourceEvent):void {
-            let loading:ILoadingUI = zero.loadingMgr.getLoadingUI();
-            if(loading) loading.setProgress(e.itemsLoaded, e.itemsTotal);
+        protected onLoadProgress(e: RES.ResourceEvent): void {
+            let loading: LoadingUI = zero.loadingMgr.getLoadingUI();
+            if (loading) loading.setProgress(e.itemsLoaded, e.itemsTotal);
         }
     }
 }

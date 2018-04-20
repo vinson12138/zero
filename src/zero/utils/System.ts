@@ -1,21 +1,25 @@
 module zero {
 	export class System {
-		private static _width: number;
-		private static _height: number;
+		public static width: number;
+		public static height: number;
+		public static designWidth: number;
+		public static designHeight: number;
+		public static stage: egret.Stage;
+
 		private constructor() {
 		}
 
-		public static set width(width: number) {
-			this._width = width;
-		}
-		public static get width(): number {
-			return this._width
-		}
-		public static set height(height: number) {
-			this._height = height;
-		}
-		public static get height(): number {
-			return this._height;
+		public static init(stage: egret.Stage, responsive: boolean = false): void {
+			this.stage = stage;
+			System.width = stage.stageWidth;
+			System.height = stage.stageHeight;
+			
+			if (responsive) {
+				this.stage.addEventListener(egret.Event.RESIZE, () => {
+					System.width = stage.stageWidth;
+					System.height = stage.stageHeight;
+				}, this);
+			}
 		}
 	}
 }

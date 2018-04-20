@@ -61,7 +61,8 @@
 	<script egret="lib" src="bin-debug/Main.js"></script>
 	<script egret="lib" src="bin-debug/zero/Global.js"></script>
 	<script egret="lib" src="bin-debug/zero/effect/Effect.js"></script>
-	<script egret="lib" src="bin-debug/zero/loading/ILoadingUI.js"></script>
+	<script egret="lib" src="bin-debug/zero/event/EventCenter.js"></script>
+	<script egret="lib" src="bin-debug/zero/event/IEventData.js"></script>
 	<script egret="lib" src="bin-debug/ThemeAdapter.js"></script>
 	<script egret="lib" src="bin-debug/example/constant/global.js"></script>
 	<script egret="lib" src="bin-debug/example/hub/main/HubMainController.js"></script>
@@ -74,8 +75,8 @@
 	<script egret="lib" src="bin-debug/example/RPG-game1/GameUIView.js"></script>
 	<script egret="lib" src="bin-debug/example/RPG-game1/Role.js"></script>
 	<script egret="lib" src="bin-debug/example/scenes/HubScene.js"></script>
+	<script egret="lib" src="bin-debug/zero/utils/cookie.js"></script>
 	<script egret="lib" src="bin-debug/zero/utils/Device.js"></script>
-	<script egret="lib" src="bin-debug/zero/utils/EZCookie.js"></script>
 	<script egret="lib" src="bin-debug/example/scenes/LoginScene.js"></script>
 	<script egret="lib" src="bin-debug/zero/utils/ResUtils.js"></script>
 	<script egret="lib" src="bin-debug/example/scenes/RPGScene1.js"></script>
@@ -89,7 +90,7 @@
     <div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
          data-entry-class="Main"
          data-orientation="landscape"
-         data-scale-mode="showAll"
+         data-scale-mode = 'fixedWidth'
          data-frame-rate="30"
          data-content-width="1280"
          data-content-height="720"

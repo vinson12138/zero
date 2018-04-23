@@ -2,7 +2,7 @@
 <e:Skin class="HubMainSkin" width="1280" height="720" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
 	<w:Config id="1612c6703fc" ></w:Config>
 	<e:Image source="bg_main_jpg" left="0" top="0" right="0" bottom="0"/>
-	<e:Button id="_btnGame" label="RPG Game" horizontalCenter="-279" verticalCenter="-88" anchorOffsetX="0" width="250" anchorOffsetY="0" height="250"/>
+	<e:Button id="_btnGame" label="RPG Game" verticalCenter="-80" anchorOffsetX="0" width="250" anchorOffsetY="0" height="250" left="249"/>
 	<e:Button id="_btnShop" label="Shop" x="10" top="24"/>
 	<e:Button id="_btnAsset" label="Asset" x="10" bottom="24"/>
 	<e:Button id="_btnSetting" label="Logout" width="80" right="24" top="24"/>

@@ -10,8 +10,6 @@ namespace example {
 
         public constructor(){
             super();
-
-            this.autoReleaseResource = true;
         }
 
         protected onLoadComplete():void {

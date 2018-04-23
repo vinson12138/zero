@@ -57,7 +57,7 @@ class Main extends eui.UILayer {
         
         zero.System.designWidth = 1280;
         zero.System.designHeight = 720;
-        zero.System.init(this.stage, false);
+        zero.System.init(this.stage, true);
 
         zero.sceneMgr.stage = this.stage;
 

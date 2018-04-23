@@ -13,13 +13,11 @@ namespace example {
             super();
 
             this.groupName = 'rpg_game';
-            this.autoReleaseResource = true;
         }
 
         protected onLoadComplete():void {
             super.onLoadComplete();
             zero.layerMgr.register(this, RPGScene1.MAP, new GameMainView(), "Map层");
-
             zero.layerMgr.register(this, RPGScene1.UI, new GameUIView(), "UI");
             // zero.layerMgr.register(this, RPGScene1.POPUP, new Layer());
             // zero.layerMgr.register(this, RPGScene1.TIP, new EUILayer(), "提示层");

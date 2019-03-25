@@ -46,11 +46,11 @@ namespace zero {
             let notification: Notification = new Notification(name, data);
             let observers: Controller[] = this._observers.values;
             for (let observer of observers) {
-                if (!observer) return;
+                if (!observer) continue;
                 //只给订阅了此消息的观察者，发出通知
                 let notificationList: string[] = observer.notificationList();
                 if (!notificationList || notificationList.indexOf(name) < 0)
-                    return;
+                    continue;
 
                 observer.handleNotification(notification);
             }
@@ -68,7 +68,7 @@ namespace zero {
         public onRemove(): void {
             let observers: Controller[] = this._observers.values;
             for (let observer of observers) {
-                if (!observer) return;
+                if (!observer) continue;
 
                 observer.onRemove();
                 observer = null;
